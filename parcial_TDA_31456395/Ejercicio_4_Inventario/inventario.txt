@@ -1,0 +1,6 @@
+Espada_Larga A 45
+Pocion_Menor P 0
+Hierro_Bruto M 100
+Escudo_Roto A 0
+Pocion_Mayor P 3
+Madera M 0
