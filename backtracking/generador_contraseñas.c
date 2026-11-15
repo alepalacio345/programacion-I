@@ -69,11 +69,13 @@ int main(){
 
 
 void crear_backtracking(int cantidad_palabras, diccionario_palabras Dicionario[],int cantidad_reglas,diccionario_reglas Dicionario_reglas[]){
-
+    
     char clave_gn[MAX_LETRAS];
 
     //ciclo para recorrer las reglas
     for(int i = 0; i < cantidad_reglas; i++){
+
+        clave_gn[0] = '\0';
         generar_clave(cantidad_palabras,Dicionario,Dicionario_reglas[i],strlen(Dicionario_reglas[i].regla),0,clave_gn);
     }
 
@@ -81,31 +83,45 @@ void crear_backtracking(int cantidad_palabras, diccionario_palabras Dicionario[]
 
 void generar_clave(int cantiadad_palabras,diccionario_palabras Diccionario_palabras[],diccionario_reglas Dicionario_reglas, int cantidad_caracteres, int acum, char clave_gn[]){
 
+    int indice_viejo;
+
     if(acum >= cantidad_caracteres){
         printf("%s\n",clave_gn);
         return;
-    }else{
-
-        for(int j = acum; j <= cantidad_caracteres; j++){
-
-            if(Dicionario_reglas.regla[j] == '#'){
-                strcat(clave_gn,Diccionario_palabras[cantiadad_palabras].palabra);
-                acum++;
-
-            }else{
-                acum++;
-                //concatenamos el numero
-                for(int k = 0; k <= 9; k++){
-                    clave_gn[strlen(clave_gn) + 1] = k + '0';
-                    generar_clave(cantiadad_palabras,Diccionario_palabras,Dicionario_reglas,cantidad_caracteres,acum,clave_gn);
-                }
-                
-            }
-
-
-        }
-
-
     }
+
+    indice_viejo = strlen(clave_gn);
+
+
+    //si entra aqui es porque es palabra
+    if(Dicionario_reglas.regla[acum] == '#'){
+
+        for(int i = 0;i < cantiadad_palabras;i++){
+            // hacemos copiamos la palabra
+            strcat(clave_gn,Diccionario_palabras[i].palabra);
+
+            // ya llamos a la recuersividad
+            generar_clave(cantiadad_palabras,Diccionario_palabras,Dicionario_reglas,cantidad_caracteres,acum + 1,clave_gn);
+
+            //deshacemos el backtracking
+            clave_gn[indice_viejo] = '\0';
+        }
+    
+    
+    }else{
+            
+        for(int k = 0; k <= 9; k++){
+
+            //guardamos el numero al final
+            clave_gn[indice_viejo] = k + '0';
+            //agregamos al final para que sea una string normal
+            clave_gn[indice_viejo + 1] = '\0';
+
+            generar_clave(cantiadad_palabras,Diccionario_palabras,Dicionario_reglas,cantidad_caracteres,acum + 1,clave_gn);
+
+            clave_gn[indice_viejo] = '\0';
+        }
+    }
+
 
 }
