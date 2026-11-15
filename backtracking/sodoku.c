@@ -5,7 +5,7 @@
 
 
 void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num);
-bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int num_probar);
+bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar);
 
 int main(){
 
@@ -50,20 +50,29 @@ void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num){
     }
 }
 
-bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int num_probar){
+bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar){
 
-    bool salida;
+    int fila_cajita;
+    int columna_cajita;
 
-    for(int i = 0; i < tamaño_caja; i++){
+    //calcumos en que cajita estamo ("alto truco de gemenis")
+    fila_cajita    = fila - (fila % tamaño_caja); // fila donde inicia la cajita
+    columna_cajita = columna - (columna % tamaño_caja); // columna donde inicia la cajita
+
+    for(int i = 0; i < MAX_DIMENSIONES; i++){
         //revisamos las filas y las columnas
         if( (matriz[fila][i] == num_probar) || (matriz[i][columna] == num_probar) ){
-            salida = false;
+            return false;
         }
-
-
     }
 
-    return salida;
+    for(int k = 0; k < tamaño_caja; k++){
+        for(int j = 0; j < tamaño_caja; j++){
+            if(matriz[fila_cajita + k][columna_cajita + j] == num_probar){
+                return false;
+            }
+        }
+    }
 
-
+    return true;
 }
