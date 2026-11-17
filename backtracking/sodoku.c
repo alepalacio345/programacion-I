@@ -2,22 +2,48 @@
 #include <ctype.h>
 #include <stdbool.h>
 #define MAX_DIMENSIONES 9
+#define ok printf("ok\n");
 
 
+bool validar_fin(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES],int filas, int columnas);
+void imprimir_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES],int filas, int columnas);
 void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num);
-bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar);
+bool es_valido(int tamano_caja, int filas, int columnas, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar);
+/**
+ * @brief la mama de los helados es la funcion principal para hacer
+ * el backtracking
+**/
+bool backtracking(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int filas, int columnas,int tamano_cajita);
+
+
+
 
 int main(){
 
     //var
     char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES];
     int num;
-
+    int filas, columnas;
+    
     cargar_matriz(matriz,&num);
+
+    filas = num * num;
+    columnas = num * num;
+    
+    printf("Soduku original: \n");
+    imprimir_matriz(matriz,filas,columnas);
+
+    printf("\nResultado: \n");
+    if(!backtracking(matriz,filas,columnas,num)){
+        printf("NO HAY SOLUCIÓN\n");
+    }
+    
 
 
     return 0;
 }
+
+
 
 
 void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num){
@@ -33,12 +59,13 @@ void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num){
     if(entrada == NULL){
         printf("error al abrir el archivo\n");
     }else{
-        fscanf(entrada,"%i",&num);
+        fscanf(entrada,"%i\n",num);
 
         while( (letra = fgetc(entrada)) != EOF){
             //aumentamos las filas si llegamos a un \n
             if(letra == '\n'){
                 fila++;
+                column = 0;
             }
             // si es un numero entonces se guarda
             if(isdigit((unsigned char)letra)){
@@ -50,24 +77,24 @@ void cargar_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int *num){
     }
 }
 
-bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar){
+bool es_valido(int tamano_caja, int filas, int columnas, char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], char num_probar){
 
     int fila_cajita;
     int columna_cajita;
 
     //calcumos en que cajita estamo ("alto truco de gemenis")
-    fila_cajita    = fila - (fila % tamaño_caja); // fila donde inicia la cajita
-    columna_cajita = columna - (columna % tamaño_caja); // columna donde inicia la cajita
+    fila_cajita    = filas - (filas % tamano_caja); // fila donde inicia la cajita
+    columna_cajita = columnas - (columnas % tamano_caja); // columna donde inicia la cajita
 
-    for(int i = 0; i < MAX_DIMENSIONES; i++){
+    for(int i = 0; i < tamano_caja * tamano_caja; i++){
         //revisamos las filas y las columnas
-        if( (matriz[fila][i] == num_probar) || (matriz[i][columna] == num_probar) ){
+        if( (matriz[filas][i] == num_probar) || (matriz[i][columnas] == num_probar) ){
             return false;
         }
     }
 
-    for(int k = 0; k < tamaño_caja; k++){
-        for(int j = 0; j < tamaño_caja; j++){
+    for(int k = 0; k < tamano_caja; k++){
+        for(int j = 0; j < tamano_caja; j++){
             if(matriz[fila_cajita + k][columna_cajita + j] == num_probar){
                 return false;
             }
@@ -75,4 +102,72 @@ bool es_valido(int tamaño_caja, int fila, int columna, char matriz[MAX_DIMENSIO
     }
 
     return true;
+}
+
+
+
+
+bool backtracking(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES], int filas, int columnas, int tamano_cajita){
+
+    if(validar_fin(matriz,filas,columnas)){
+        imprimir_matriz(matriz,filas,columnas);
+        return true;
+    }
+        
+    for(int i = 0; i < filas;i++){
+        for(int j = 0; j < columnas;j++){
+
+            if(matriz[i][j] == '0'){
+                
+                for(int k = 1; k <= filas;k++){
+                    
+                    if(es_valido(tamano_cajita,i,j,matriz,k + '0')){
+                        matriz[i][j] = k + '0';
+
+                        //hacemos
+                        if(!backtracking(matriz,filas,columnas,tamano_cajita)){
+                            //desacemos
+                            matriz[i][j] ='0';
+                        }else{
+                            return true;
+                        }
+                    }
+                }
+                //desacemos
+                return false;
+
+            }
+
+        }
+    }
+
+}
+
+bool validar_fin(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES],int filas, int columnas){
+
+    for(int i = 0; i < filas;i++){
+        for(int j = 0; j < columnas;j++){
+            
+            if(matriz[i][j] == '0'){
+                return false;
+            }
+        }
+    }
+
+    return true;
+
+}
+
+
+void imprimir_matriz(char matriz[MAX_DIMENSIONES][MAX_DIMENSIONES],int filas, int columnas){
+
+    printf("\n");
+
+    for(int i = 0; i < filas;i++){
+        for(int j = 0; j < columnas;j++){
+            printf("%c ",matriz[i][j]);
+        }
+        printf("\n");
+    }
+
 }
