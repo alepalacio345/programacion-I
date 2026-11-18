@@ -1,0 +1,73 @@
+2
+14 2
+Valencia
+Naguanagua
+San Diego
+Los Guayos
+Guacara
+Puerto Cabello
+San Joaquin
+El Libertador
+Tocuyito
+Bejuma
+Miranda
+Montalban
+Juan Jose Mora
+Diego Ibarra
+20
+Valencia|Naguanagua
+Valencia|San Diego
+Valencia|Los Guayos
+Valencia|Guacara
+Valencia|San Joaquin
+Naguanagua|San Diego
+Naguanagua|Guacara
+San Diego|Los Guayos
+San Diego|San Joaquin
+Los Guayos|Guacara
+Guacara|Puerto Cabello
+Puerto Cabello|Juan Jose Mora
+Puerto Cabello|El Libertador
+San Joaquin|El Libertador
+El Libertador|Tocuyito
+Tocuyito|Bejuma
+Bejuma|Miranda
+Miranda|Montalban
+Montalban|Diego Ibarra
+Diego Ibarra|Tocuyito
+14 3
+Valencia
+Naguanagua
+San Diego
+Los Guayos
+Guacara
+Puerto Cabello
+San Joaquin
+El Libertador
+Tocuyito
+Bejuma
+Miranda
+Montalban
+Juan Jose Mora
+Diego Ibarra
+20
+Valencia|Naguanagua
+Valencia|San Diego
+Valencia|Los Guayos
+Valencia|Guacara
+Valencia|San Joaquin
+Naguanagua|San Diego
+Naguanagua|Guacara
+San Diego|Los Guayos
+San Diego|San Joaquin
+Los Guayos|Guacara
+Guacara|Puerto Cabello
+Puerto Cabello|Juan Jose Mora
+Puerto Cabello|El Libertador
+San Joaquin|El Libertador
+El Libertador|Tocuyito
+Tocuyito|Bejuma
+Bejuma|Miranda
+Miranda|Montalban
+Montalban|Diego Ibarra
+Diego Ibarra|Tocuyito

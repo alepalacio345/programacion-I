@@ -1,0 +1,25 @@
+2
+4 3
+Valencia
+Naguanagua
+San Diego
+Guacara
+6
+Valencia|Naguanagua
+Valencia|San Diego
+Valencia|Guacara
+Naguanagua|San Diego
+Naguanagua|Guacara
+San Diego|Guacara
+4 4
+Valencia
+Naguanagua
+San Diego
+Guacara
+6
+Valencia|Naguanagua
+Valencia|San Diego
+Valencia|Guacara
+Naguanagua|San Diego
+Naguanagua|Guacara
+San Diego|Guacara

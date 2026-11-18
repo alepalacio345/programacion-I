@@ -1,0 +1,33 @@
+3
+5 3
+Valencia
+Naguanagua
+San Diego
+Los Guayos
+Guacara
+7
+Valencia|Naguanagua
+Valencia|San Diego
+Valencia|Los Guayos
+Naguanagua|San Diego
+Naguanagua|Guacara
+San Diego|Los Guayos
+Los Guayos|Guacara
+4 2
+Valencia
+Naguanagua
+San Diego
+Los Guayos
+4
+Valencia|Naguanagua
+Naguanagua|San Diego
+San Diego|Los Guayos
+Los Guayos|Valencia
+3 2
+Valencia
+Naguanagua
+San Diego
+3
+Valencia|Naguanagua
+Naguanagua|San Diego
+San Diego|Valencia

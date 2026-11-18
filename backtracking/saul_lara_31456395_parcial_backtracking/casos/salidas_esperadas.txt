@@ -1,0 +1,55 @@
+CASOS DE ENTRADA - EJERCICIO 2 "EL ARCOIRIS DE CARABOBO"
+========================================================
+Formato de cada archivo (exactamente el del enunciado):
+
+    N                      <- cantidad de proyectos
+    V M                    <- municipios y colores disponibles
+    <V lineas con nombres completos>
+    E                      <- cantidad de fronteras
+    <E lineas "Nombre1|Nombre2">
+
+Salida que debe producir cada caso: una linea con SI o NO.
+(Este archivo es solo una guia de verificacion; el programa NO lo lee.)
+
+Tabla de verificacion
+----------------------
+archivo                          casos   salida esperada   que prueba
+-------------------------------  -----   ---------------   ------------------------------------------
+entrada_01_trivial.txt             1     SI                1 municipio, 0 fronteras, M=1. Lo minimo.
+entrada_02_triangulo.txt           2     NO SI             Mismo triangulo con M=2 (imposible) y M=3.
+                                                           Es EL caso que atrapa el error de no deshacer.
+entrada_03_ejemplo_parcial.txt     3     SI SI NO          El ejemplo oficial del PDF, tal cual.
+entrada_04_sin_fronteras.txt       1     SI                4 municipios aislados con M=1: todos del
+                                                           mismo color. Prueba que no inventas conflictos.
+entrada_05_nombres_compuestos.txt  1     SI                Nombres de varias palabras (con espacios).
+                                                           Camino de 4 vertices, M=2.
+entrada_06_k4.txt                  2     NO SI             K4 (4 municipios todos vecinos): M=3 imposible,
+                                                           M=4 posible.
+entrada_07_ciclo_impar.txt         2     NO SI             Ciclo de 5: con M=2 no se puede, con M=3 si.
+entrada_08_m_mayor_que_v.txt       1     SI                M=10 con V=3: sobran colores, no te debes
+                                                           romper por indices.
+entrada_09_grande.txt              2     NO SI             14 municipios (el maximo) con 20 fronteras.
+                                                           M=2 choca con el triangulo; M=3 si alcanza.
+entrada_10_k4_grande.txt           2     NO SI             14 municipios con un K4 escondido: M=3 no
+                                                           alcanza pero solo se descubre explorando.
+
+Todas estas respuestas fueron verificadas con un solver aparte, no a ojo.
+
+Como usarlos
+------------
+Redirigiendo la entrada estandar (asi se prueba en el parcial):
+
+    ejercicio2.exe < casos\entrada_03_ejemplo_parcial.txt
+
+y comparar contra la columna "salida esperada" de arriba.
+
+Orden recomendado: 01 -> 02 -> 03 -> 04 -> 05 -> 08 -> 06 -> 07 -> 09 -> 10.
+Si el 01 falla, el problema es la lectura. Si el 02 falla, es el deshacer.
+Si fallan solo los "grandes", es desbordamiento de arreglos o indices.
+
+Nota sobre los saltos de linea
+------------------------------
+Los archivos estan guardados con salto de linea LF (no CRLF). Si los abres y
+guardas con un editor que cambie a CRLF, el '\r' se te queda pegado al final
+del nombre y las comparaciones fallan. Para blindarte, al leer cada linea
+descarta el '\n' y tambien el '\r' si aparece.

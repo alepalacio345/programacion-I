@@ -1,0 +1,9 @@
+1
+3 10
+Valencia
+Naguanagua
+San Diego
+3
+Valencia|Naguanagua
+Naguanagua|San Diego
+San Diego|Valencia

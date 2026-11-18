@@ -1,0 +1,17 @@
+2
+3 2
+Valencia
+Naguanagua
+San Diego
+3
+Valencia|Naguanagua
+Naguanagua|San Diego
+San Diego|Valencia
+3 3
+Valencia
+Naguanagua
+San Diego
+3
+Valencia|Naguanagua
+Naguanagua|San Diego
+San Diego|Valencia

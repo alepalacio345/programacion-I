@@ -1,0 +1,10 @@
+1
+4 2
+San Joaquin
+Los Guayos
+El Libertador
+San Diego
+3
+San Joaquin|Los Guayos
+Los Guayos|El Libertador
+El Libertador|San Diego
